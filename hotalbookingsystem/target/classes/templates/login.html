@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    	<!-- Mobile Web-app fullscreen -->
+    	<meta name="apple-mobile-web-app-capable" content="yes">
+    	<meta name="mobile-web-app-capable" content="yes">
+
+    	<!-- Meta tags -->
+    	<meta name="description" content="">
+    	<meta name="author" content="">
+    	<link rel="icon" href="favicon.ico">
+    	
+    	<!--Title-->
+		<title>登录</title>
+		
+		<!--CSS styles-->
+    	<link rel="stylesheet" media="all" href="css/bootstrap.css" />
+    	<link rel="stylesheet" media="all" href="css/animate.css" />
+    	<link rel="stylesheet" media="all" href="css/font-awesome.css" />
+    	<link rel="stylesheet" media="all" href="css/linear-icons.css" />
+    	<link rel="stylesheet" media="all" href="css/hotel-icons.css" />
+    	<link rel="stylesheet" media="all" href="css/magnific-popup.css" />
+    	<link rel="stylesheet" media="all" href="css/owl.carousel.css" />
+    	<link rel="stylesheet" media="all" href="css/datepicker.css" />
+    	<link rel="stylesheet" media="all" href="css/theme.css" />
+
+    	<!--Google fonts-->
+    	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,500&amp;subset=latin-ext" rel="stylesheet">
+    	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700&amp;subset=latin-ext" rel="stylesheet">
+
+
+    	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    	<!--[if lt IE 9]>
+    	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    	<![endif]-->
+	</head>
+	<body>
+		<div class="page-loader"></div>
+
+    <div class="wrapper">
+
+        <header>
+
+            <!-- ======================== Navigation ======================== -->
+
+            <div class="container">
+
+                <!-- === navigation-top === -->
+
+                <nav class="navigation-top clearfix">
+					<!-- navigation-top-left -->
+
+                    <div class="navigation-top-left">
+                        
+                    </div>
+
+                    <!-- navigation-top-right -->
+
+                    <div class="navigation-top-right">
+                        <a class="box" href="register.html">
+                            <i class="glyphicon glyphicon-list"></i> 
+                            	注册
+                        </a>
+                    </div>
+                </nav>
+
+                <!-- === navigation-main === -->
+
+                <nav class="navigation-main clearfix">
+
+                    <!-- logo -->
+
+                    <div class="logo animated fadeIn">
+                        <a href="index.html">
+                            <img class="logo-desktop" src="images/logo.png" alt="Alternate Text" />
+                            <img class="logo-mobile" src="images/logo-mobile.png" alt="Alternate Text" />
+                        </a>
+                    </div>
+
+                    <!-- toggle-menu -->
+
+                    <div class="toggle-menu"><i class="icon icon-menu"></i></div>
+
+                    <!-- navigation-block -->
+
+                    <div class="navigation-block clearfix">
+
+                        <!-- navigation-left -->
+
+                        <ul class="navigation-left">
+                            <li>
+                                <a href="index.html">首页 </a>
+                            </li>
+                            <li>
+                                <a href="about.html">酒店介绍 </a>
+                            </li>
+                            <li>
+                                <a href="facility.html">酒店设施 </a>
+                            </li>
+                        </ul>
+
+                        <!-- navigation-right -->
+
+                        <ul class="navigation-right">
+                            <li>
+                                <a href="userComment.html">用户评论 </a>
+                            </li>
+                            <li>
+                                <a href="rooms-category.html">房间分类 <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
+                                <ul>
+                                    <li><a href="singleRoom.html">单人房</a></li>
+                                    <li><a href="doubleRoom.html">双人房</a></li>
+                                    <li><a href="queenSizeBed.html">大床房</a></li>
+                                    <li><a href="familySuite.html">家庭套房</a></li>
+                                    <li><a href="presidentialSuite.html">总统套房</a></li>
+                                    <li><a href="luxuryApartment.html">豪华公寓</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="contact.html">联系我们 </a>
+                            </li>
+                        </ul>
+
+                    </div> <!--/navigation-block-->
+
+                </nav>
+            </div> <!--/container-->
+
+        </header>
+
+        <!-- ========================  Checkout ======================== -->
+
+        <section class="page">
+
+            <!-- ===  Page header === -->
+
+            <div class="page-header" style="background-image:url(images/header-1.jpg)">
+                <div class="container">
+                    <h2 class="title">登录</h2>
+                    <p>通过登录进入个人主页</p>
+                </div>
+            </div>
+
+            <!-- ===  Checkout === -->
+
+            <div class="checkout">
+
+                <div class="container">
+
+                    <div class="clearfix">
+
+                        <!-- ========================  Note block ======================== -->
+
+                        <div class="cart-wrapper">
+
+                            <div class="note-block">
+
+                                <div class="row">
+                                	<!-- === login-wrapper === -->
+
+                                    <div class="login-wrapper">
+
+                                        <div class="white-block">
+                                        	
+                                            <div class="row">
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <input id="input" type="text" value="" class="form-control" placeholder="邮箱/ID" onblur="checkInput()">
+                                                        <label id="input_trip"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <input id="password" type="password" value="" class="form-control" placeholder="密码" onblur="checkPassword()">
+                                                        <label id="password_trip"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <img id="codeImg" src="/code/getCode" alt="更换验证码" onclick="getCode()">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-10">
+                                                    <div class="form-group">
+                                                        <input id="code" type="text" value="" class="form-control" placeholder="验证码" onblur="checkCode()">
+                                                        <label id="code_trip"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12" align="center">
+                                                	<span class="checkbox checkbox-inline">
+                                                    	<input type="radio" id="user" value="user" name="type" checked="checked">
+                                                    	<label for="user">
+                                                        	<span>用户</span>
+                                                    	</label>
+                                                	</span>
+
+                                                	<span class="checkbox checkbox-inline">
+                                                    	<input type="radio" id="receptionist" value="receptionist" name="type">
+                                                    	<label for="receptionist">
+                                                        	<span>前台</span>
+                                                    	</label>
+                                                	</span>
+
+                                                	<span class="checkbox checkbox-inline">
+                                                    	<input type="radio" id="admin" value="admin" name="type">
+                                                    	<label for="admin">
+                                                        	<span>管理员</span>
+                                                    	</label>
+                                                	</span>
+                                            	</div>
+
+                                                <div class="col-md-12">
+                                                    <input id="login" type="submit" class="btn btn-main btn-block" onclick="submit()" value="登录">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> <!--/login-wrapper-->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div> <!--/container-->
+            </div> <!--/checkout-->
+
+        </section>
+
+
+        <!-- ========================  Subscribe ======================== -->
+
+        <section class="subscribe">
+            <div class="container">
+                <div class="box">
+                    <h2 class="title">感谢</h2>
+                    <div class="text">
+                        <p>非常感谢各位客户的支持</p>
+                    </div>
+                    <a href="contact.html"><button class="btn btn-clean">联系我们</button></a>
+                </div>
+            </div>
+        </section> 
+
+        <!-- ================== Footer  ================== -->
+
+        <footer>
+            <div class="container">
+
+                <!--footer social-->
+
+                <div class="footer-social">
+                    <div class="row">
+                        <div class="col-sm-12 text-center hidden">
+                            <a href="" class="footer-logo"><img src="images/logo.png" alt="Alternate Text" /></a>
+                        </div>
+                        <div class="col-sm-12 icons">
+                            
+                        </div>
+                        <div class="col-sm-12 copyright">
+                            
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            <img src="images/logo-footer.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div> <!--/wrapper-->
+        <form id="form">
+
+        </form>
+    <!--JS files-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/jquery.bootstrap.js"></script>
+    <script src="js/jquery.magnific-popup.js"></script>
+    <script src="js/jquery.owl.carousel.js"></script>
+    <script src="js/main.js"></script>
+        <script type="text/javascript">
+            function getCode() {
+                $("#code").val("");
+                $("#codeImg").attr("src", 'code/getCode?' + Math.random());
+            }
+
+            function trip(obj, trip) {
+                document.getElementById(obj).innerHTML = "<b>" + trip + "</b>";
+            }
+
+            function checkInput() {
+                var radio = $("input[name='type']:checked").val();
+                if (radio === "user"){
+                    //校验邮箱:/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/
+                    var inputEmail = document.getElementById("input");
+                    var uEmail = inputEmail.value;
+                    if (!/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/.test(uEmail)) {
+                        trip("input_trip", "邮箱不合法!!");
+                        return false;
+                    } else {
+                        trip("input_trip", "");
+                        return true;
+                    }
+                }else if (radio === "receptionist"){
+                    var inputRId = document.getElementById("input");
+                    var rId = inputRId.value;
+                    if (rId === "") {
+                        trip("input_trip", "前台ID不能为空!!");
+                        return false;
+                    } else {
+                        trip("input_trip", "");
+                        return true;
+                    }
+                }else if (radio === "admin"){
+                    var inputAId = document.getElementById("input");
+                    var aId = inputAId.value;
+                    if (aId !== "") {
+                        trip("input_trip", "");
+                        return true;
+                    } else {
+                        trip("input_trip", "管理员ID不能为空!!");
+                        return false;
+                    }
+                }else {
+                    alert("error");
+                }
+            }
+
+            function checkPassword() {
+                //密码长度6~18
+                var password = document.getElementById("password");
+                var pass = password.value;
+                if (pass.length < 6|| pass.length > 18) {
+                    trip("password_trip", "密码为6~18位!!");
+                    return false;
+                } else {
+                    trip("password_trip", "");
+                    return true;
+                }
+            }
+
+            function checkCode() {
+                var value = document.getElementById("code");
+                var code = value.value;
+                if (code.length !== 4) {
+                    trip("code_trip", "验证码为4位!!");
+                    return false;
+                } else {
+                    trip("code_trip", "");
+                    return true;
+                }
+            }
+
+            function checkForm() {
+                if (checkInput() && checkPassword() && checkCode()){
+                    return true;
+                }else {
+                    alert("格式错误");
+                    return false;
+                }
+            }
+
+            function submit() {
+                var code=$("#code").val();
+                var radio = $("input[name='type']:checked").val();
+                $.ajax({
+                    async: true,
+                    type: 'post',
+                    url: '/code/checkCode',
+                    dataType:'json',
+                    data: {
+                        code: code
+                    },
+                    success: function (res) {
+                        if (res === true){
+                            if (radio === "user"){
+                                userLogin();
+                            }else if (radio === "receptionist"){
+                                receptionistLogin();
+                            }else if (radio === "admin"){
+                                adminLogin();
+                            }else {
+                                alert("error");
+                            }
+                        }else {
+                            alert("验证码错误");
+                            getCode();
+                        }
+                    },
+                    error: function (){
+                        alert("失败");
+                    }
+                });
+            }
+            function userLogin() {
+                if (checkForm()){
+                    var uEmail=$("#input").val();
+                    var uPassword=$("#password").val();
+                    $.ajax({
+                        async:false,
+                        url : "/user/userLogin",
+                        datatype : "String",
+                        type : "post",
+                        data:{
+                            uEmail:uEmail, uPassword:uPassword
+                        },success:function (res) {
+                            if (res === true){
+                                alert("登录成功");
+                                document.getElementById("form").action="/userPage?uEmail="+uEmail;
+                                document.getElementById("form").method="post";
+                                document.getElementById("form").submit();
+                            }else{
+                                alert("登录失败");
+                                document.getElementById("form").action="/loginPage";
+                                document.getElementById("form").method="post";
+                                document.getElementById("form").submit();
+                            }
+                        },error:function () {
+                            alert("失败");
+                        }
+                    });
+                }
+            }
+            function receptionistLogin() {
+                if (checkForm()){
+                    var rId=$("#input").val();
+                    var rPassword=$("#password").val();
+                    $.ajax({
+                        async:false,
+                        url : "/receptionist/receptionistLogin",
+                        datatype : "String",
+                        type : "post",
+                        data:{
+                            rId:rId, rPassword:rPassword
+                        },success:function (res) {
+                            if (res === true){
+                                alert("登录成功");
+                                document.getElementById("form").action="/receptionistPage?rId="+rId;
+                                document.getElementById("form").method="post";
+                                document.getElementById("form").submit();
+                            }else{
+                                alert("登录失败");
+                                document.getElementById("form").action="/loginPage";
+                                document.getElementById("form").method="post";
+                                document.getElementById("form").submit();
+                            }
+                        },error:function () {
+                            alert("失败");
+                        }
+                    });
+                }
+            }
+            function adminLogin() {
+                if (checkForm()){
+                    var aId=$("#input").val();
+                    var aPassword=$("#password").val();
+                    $.ajax({
+                        async:false,
+                        url : "/admin/adminLogin",
+                        datatype : "String",
+                        type : "post",
+                        data:{
+                            aId:aId, aPassword:aPassword
+                        },success:function (res) {
+                            if (res === true){
+                                alert("登录成功");
+                                document.getElementById("form").action="/adminPage?aId="+aId;
+                                document.getElementById("form").method="post";
+                                document.getElementById("form").submit();
+                            }else{
+                                alert("登录失败");
+                                document.getElementById("form").action="/loginPage";
+                                document.getElementById("form").method="post";
+                                document.getElementById("form").submit();
+                            }
+                        },error:function () {
+                            alert("失败");
+                        }
+                    });
+                }
+            }
+        </script>
+	</body>
+</html>
