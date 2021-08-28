@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    	<!-- Mobile Web-app fullscreen -->
+    	<meta name="apple-mobile-web-app-capable" content="yes">
+    	<meta name="mobile-web-app-capable" content="yes">
+
+    	<!-- Meta tags -->
+    	<meta name="description" content="">
+    	<meta name="author" content="">
+    	<link rel="icon" href="favicon.ico">
+    	
+    	<!--Title-->
+		<title>用户注册</title>
+		
+		<!--CSS styles-->
+    	<link rel="stylesheet" media="all" href="css/bootstrap.css" />
+    	<link rel="stylesheet" media="all" href="css/animate.css" />
+    	<link rel="stylesheet" media="all" href="css/font-awesome.css" />
+    	<link rel="stylesheet" media="all" href="css/linear-icons.css" />
+    	<link rel="stylesheet" media="all" href="css/hotel-icons.css" />
+    	<link rel="stylesheet" media="all" href="css/magnific-popup.css" />
+    	<link rel="stylesheet" media="all" href="css/owl.carousel.css" />
+    	<link rel="stylesheet" media="all" href="css/datepicker.css" />
+    	<link rel="stylesheet" media="all" href="css/theme.css" />
+
+    	<!--Google fonts-->
+    	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,500&amp;subset=latin-ext" rel="stylesheet">
+    	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700&amp;subset=latin-ext" rel="stylesheet">
+
+
+    	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    	<!--[if lt IE 9]>
+    	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    	<![endif]-->
+	</head>
+	<body>
+		<div class="page-loader"></div>
+
+    <div class="wrapper">
+
+        <header>
+
+            <!-- ======================== Navigation ======================== -->
+
+            <div class="container">
+
+                <!-- === navigation-top === -->
+
+                <nav class="navigation-top clearfix">
+					<!-- navigation-top-left -->
+
+                    <div class="navigation-top-left">
+                        
+                    </div>
+
+                    <!-- navigation-top-right -->
+
+                    <div class="navigation-top-right">
+                        <a class="box" href="login.html">
+                            <i class="glyphicon glyphicon-log-in"></i> 
+                            	登录
+                        </a>
+                    </div>
+                </nav>
+
+                <!-- === navigation-main === -->
+
+                <nav class="navigation-main clearfix">
+
+                    <!-- logo -->
+
+                    <div class="logo animated fadeIn">
+                        <a href="index.html">
+                            <img class="logo-desktop" src="images/logo.png" alt="Alternate Text" />
+                            <img class="logo-mobile" src="images/logo-mobile.png" alt="Alternate Text" />
+                        </a>
+                    </div>
+
+                    <!-- toggle-menu -->
+
+                    <div class="toggle-menu"><i class="icon icon-menu"></i></div>
+
+                    <!-- navigation-block -->
+
+                    <div class="navigation-block clearfix">
+
+                        <!-- navigation-left -->
+
+                        <ul class="navigation-left">
+                            <li>
+                                <a href="index.html">首页 </a>
+                            </li>
+                            <li>
+                                <a href="about.html">酒店介绍 </a>
+                            </li>
+                            <li>
+                                <a href="facility.html">酒店设施 </a>
+                            </li>
+                        </ul>
+
+                        <!-- navigation-right -->
+
+                        <ul class="navigation-right">
+                            <li>
+                                <a href="userComment.html">用户评论 </a>
+                            </li>
+                            <li>
+                                <a href="rooms-category.html">房间分类 <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
+                                <ul>
+                                    <li><a href="singleRoom.html">单人房</a></li>
+                                    <li><a href="doubleRoom.html">双人房</a></li>
+                                    <li><a href="queenSizeBed.html">大床房</a></li>
+                                    <li><a href="familySuite.html">家庭套房</a></li>
+                                    <li><a href="presidentialSuite.html">总统套房</a></li>
+                                    <li><a href="luxuryApartment.html">豪华公寓</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="contact.html">联系我们 </a>
+                            </li>
+                        </ul>
+
+                    </div> <!--/navigation-block-->
+
+                </nav>
+            </div> <!--/container-->
+
+        </header>
+
+        <!-- ========================  Checkout ======================== -->
+
+        <section class="page">
+
+            <!-- ===  Page header === -->
+
+            <div class="page-header" style="background-image:url(images/header-1.jpg)">
+                <div class="container">
+                    <h2 class="title">用户注册</h2>
+                    <p>注册您的账号</p>
+                </div>
+            </div>
+
+            <!-- ===  Checkout === -->
+
+            <div class="checkout">
+
+                <div class="container">
+
+                    <div class="clearfix">
+
+                        <!-- ========================  Note block ======================== -->
+
+                        <div class="cart-wrapper">
+
+                            <div class="note-block">
+
+                                <div class="row">
+                                	<!-- === login-wrapper === -->
+
+                                    <div class="login-wrapper">
+
+                                        <div class="white-block">
+                                        	
+                                        	<div class="row">
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <input id="email" type="email" value="" class="form-control" placeholder="邮箱: *" onblur="checkEmail()">
+                                                        <label id="email_trip"></label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <input id="name" type="text" value="" class="form-control" placeholder="用户名: *" onblur="checkName()">
+                                                        <label id="name_trip"></label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+
+                                                    <div class="form-group">
+                                                        <input id="password" type="password" value="" class="form-control" placeholder="密码:" onblur="checkPassword()">
+                                                        <label id="password_trip"></label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <input id="repassword" type="password" value="" class="form-control" placeholder="重复密码: *" onblur="checkSurePassword()">
+                                                        <label id="repassword_trip"></label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <input id="idCard" type="text" value="" class="form-control" placeholder="身份证号: *" onblur="checkIDCard()">
+                                                        <label id="idCard_trip"></label>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <input id="phone" type="text" value="" class="form-control" placeholder="电话: *" onblur="checkPhone()">
+                                                        <label id="phone_trip"></label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <input id="get-captcha" type="button" value="发送验证码" class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-10">
+                                                    <div class="form-group">
+                                                        <input id="code" type="text" value="" class="form-control" placeholder="验证码: *" onblur="checkCode()">
+                                                        <label id="code_trip"></label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <input id="register" type="submit" class="btn btn-main btn-block" onblur="checkForm()" onclick="submitT()" value="注册">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div> <!--/login-wrapper-->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div> <!--/container-->
+            </div> <!--/checkout-->
+
+        </section>
+
+
+        <!-- ========================  Subscribe ======================== -->
+
+        <section class="subscribe">
+            <div class="container">
+                <div class="box">
+                    <h2 class="title">感谢</h2>
+                    <div class="text">
+                        <p>非常感谢各位客户的支持</p>
+                    </div>
+                    <a href="contact.html"><button class="btn btn-clean">联系我们</button></a>
+                </div>
+            </div>
+        </section> 
+
+        <!-- ================== Footer  ================== -->
+
+        <footer>
+            <div class="container">
+
+                <!--footer social-->
+
+                <div class="footer-social">
+                    <div class="row">
+                        <div class="col-sm-12 text-center hidden">
+                            <a href="" class="footer-logo"><img src="images/logo.png" alt="Alternate Text" /></a>
+                        </div>
+                        <div class="col-sm-12 icons">
+                            
+                        </div>
+                        <div class="col-sm-12 copyright">
+                            
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            <img src="images/logo-footer.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div> <!--/wrapper-->
+        <form id="form">
+        </form>
+    <!--JS files-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/jquery.bootstrap.js"></script>
+    <script src="js/jquery.magnific-popup.js"></script>
+    <script src="js/jquery.owl.carousel.js"></script>
+    <script src="js/main.js"></script>
+        <script type="text/javascript">
+            $("#get-captcha").click(function () {
+                if($("#email").val() ===""){
+                    alert("邮箱不能为空");
+                    $("#email").focus();
+                    return false;
+                } else if(!/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/.test($("#email").val())){
+                    alert("请检查邮箱格式是否正确");
+                    $("#email").focus();
+                    return false;
+                } else{
+                    $("#get-captcha").attr("disabled", true).val("发送中...");
+                    $.ajax({
+                        url:'/email/send',
+                        datatype : "json",
+                        type : "post",
+                        data:{
+                            userEmail:$("#email").val()
+                        }, success:function () {
+                            alert("验证码发送成功");
+                            var count = 60;
+                            var countdown = setInterval(CountDown, 1000);
+                            function CountDown() {
+                                if (count > 0){
+                                    $("#get-captcha").attr("disabled", true).val(count + "s");
+                                }else {
+                                    $("#get-captcha").val("重新获取验证码").removeAttr("disabled");
+                                    clearInterval(countdown);
+                                    $.ajax({
+                                        url : "/email/deleteCaptcha",
+                                        datatype : "json",
+                                        type : "post",
+                                        success:function () {
+                                            alert("获取验证码失效，请重新获取");
+                                        }
+                                    })
+                                }
+                                count--;
+                            }
+                        }, error:function () {
+                            alert("获取验证码失败");
+                            $("#get-captcha").val("重新获取验证码").removeAttr("disabled");
+                        }
+                    })
+                }
+            });
+
+            function trip(obj, trip) {
+                document.getElementById(obj).innerHTML = "<b>" + trip + "</b>";
+            }
+
+            function checkForm() {
+                if (checkEmail() && checkName() && checkPassword() && checkSurePassword() && checkCode() && checkIDCard() && checkPhone()){
+                    return true;
+                }else {
+                    alert("格式错误");
+                    return false;
+                }
+            }
+
+            function checkEmail() {
+                //校验邮箱:/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/
+                var inputEmail = document.getElementById("email");
+                var uEmail = inputEmail.value;
+                if (!/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/.test(uEmail)) {
+                    trip("email_trip", "邮箱不合法!!");
+                    return false;
+                } else {
+                    trip("email_trip", "");
+                    return true;
+                }
+            }
+
+            function checkName() {
+                //获取用户名输入项
+                var userName = document.getElementById("name");
+                var uName = userName.value;
+                if (uName.length < 1 || uName.length > 10) {
+                    trip("name_trip", "用户名长度为1-10位!!");
+                    return false;
+                } else {
+                    trip("name_trip", "");
+                    return true;
+                }
+            }
+
+            function checkPassword() {
+                //密码长度大于6 和确认必须一致
+                var password = document.getElementById("password");
+                var userPass = password.value;
+                if (userPass.length < 6|| userPass.length > 18) {
+                    trip("password_trip", "密码为6~18位!!");
+                    return false;
+                } else {
+                    trip("password_trip", "");
+                    return true;
+                }
+            }
+
+            function checkSurePassword() {
+                //获取确认密码框的值 var
+                var password = document.getElementById("password");
+                var userPass = password.value;
+                var surePassword = document.getElementById("repassword");
+                var surePass = surePassword.value;
+                if (userPass.trim() !== surePass.trim()) {
+                    trip("repassword_trip", "两次密码不一致!!");
+                    return false;
+                }else {
+                    trip("repassword_trip", "");
+                    return true;
+                }
+            }
+
+            function checkIDCard() {
+                var id = document.getElementById("idCard");
+                var idCard = id.value;
+                if (!/(^\d{15}$)|(^\d{17}(\d|X)$)/.test(idCard)){
+                    trip("idCard_trip", "身份证号格式不正确!!");
+                    return false;
+                }else {
+                    trip("idCard_trip", "");
+                    return true;
+                }
+            }
+
+            function checkPhone() {
+                var num = document.getElementById("phone");
+                var phone = num.value;
+                if (phone === "") {
+                    trip("phone_trip", "手机号不能为空!!");
+                    return false;
+                }else {
+                    trip("phone_trip", "");
+                    return true;
+                }
+            }
+
+            function checkCode() {
+                return !!$.ajax({
+                    url: "/email/checkCaptcha",
+                    data: {
+                        captcha: $("#code").val()
+                    },
+                    dataType: "json",
+                    type: "post",
+                    success: function (res) {
+                        if (res === false) {
+                            trip("code_trip", "验证码错误!!");
+                            return false;
+                        } else {
+                            trip("code_trip", "");
+                            return true;
+                        }
+                    }, error: function () {
+                        alert("error");
+                        return false;
+                    }
+                });
+            }
+
+            function submitT() {
+                if (checkForm()){
+                    var uEmail=$("#email").val();
+                    var uName=$("#name").val();
+                    var uPassword=$("#password").val();
+                    var uPhone = $("#phone").val();
+                    var uIDCard = $("#idCard").val();
+                    $.ajax({
+                        async:false,
+                        url : "/user/register",
+                        datatype : "String",
+                        type : "post",
+                        data:{
+                            uEmail:uEmail, uName:uName, uPassword:uPassword, uPhone:uPhone, uIDCard:uIDCard
+                        },success:function (res) {
+                            if (res === true){
+                                alert("注册成功");
+                                document.getElementById("form").action="/loginPage";
+                                document.getElementById("form").method="post";
+                                document.getElementById("form").submit();
+                            }else{
+                                alert("注册失败");
+                                document.getElementById("form").action="/registerPage";
+                                document.getElementById("form").method="post";
+                                document.getElementById("form").submit();
+                            }
+                        },error:function () {
+                            alert("失败");
+                        }
+                    });
+                }
+            }
+        </script>
+	</body>
+</html>
