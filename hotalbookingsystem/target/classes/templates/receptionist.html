@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -154,10 +154,9 @@
         <section class="page">
 
             <!-- ===  Page header === -->
-
             <div class="page-header" style="background-image:url(images/header-1.jpg)">
                 <div class="container text-center">
-                    <h2 class="title">前台名称</h2>
+                    <h2 class="title" th:text="${rName}"></h2>
                     <p>欢迎登录</p>
                 </div>
             </div>
@@ -168,6 +167,7 @@
                 		<div class="content" id="box1" align="center" style="display: block;">
                 			<h4 class="title">我的订单</h4>
                     		<table class="table table-hover table-striped table-bordered table-condensed">
+								<thead>
 								<tr>
 									<td>订单号</td>
 									<td>房间类型</td>
@@ -184,31 +184,35 @@
 									<td>订单状态</td>
 									<td>操作</td>
 								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+								</thead>
+								<tbody>
+								<tr th:each="myOrder:${myOrders}">
+									<td th:text="${myOrder.OId}"></td>
+									<td th:text="${myOrder.roomType}"></td>
+									<td th:text="${myOrder.ATime}"></td>
+									<td th:text="${myOrder.LTime}"></td>
+									<td th:text="${myOrder.dayNum}"></td>
+									<td th:text="${myOrder.UNum}"></td>
+									<td th:text="${myOrder.UName}"></td>
+									<td th:text="${myOrder.UPhone}"></td>
+									<td th:text="${myOrder.UIDCard}"></td>
+									<td th:text="${myOrder.roomId}"></td>
+									<td th:text="${myOrder.roomFloor}"></td>
+									<td th:text="${myOrder.totalPrise}"></td>
+									<td th:text="${myOrder.OState}"></td>
 									<td>
-										<button class="btn btn-clean-dark">办理入住</button>
-										<button class="btn btn-clean-dark">办理退房</button>
-										<button class="btn btn-clean-dark">申请退订</button>
+										<button class="btn btn-clean-dark" th:onclick="checkIn([[${myOrder.OId}]], [[${myOrder.OState}]]);">办理入住</button>
+										<button class="btn btn-clean-dark" th:onclick="checkOut([[${myOrder.OId}]], [[${myOrder.OState}]]);">办理退房</button>
+										<button class="btn btn-clean-dark" th:onclick="unsubscribe([[${myOrder.OId}]], [[${myOrder.OState}]]);">办理退订</button>
 									</td>
 								</tr>
+								</tbody>
 							</table>
                 		</div>
                 		<div class="content" id="box2" align="center" style="display: none;">
                 			<h4 class="title">用户订单</h4>
 							<table class="table table-hover table-striped table-bordered table-condensed">
+								<thead>
 								<tr>
 									<td>订单号</td>
 									<td>房间类型</td>
@@ -225,117 +229,129 @@
 									<td>订单状态</td>
 									<td>操作</td>
 								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+								</thead>
+								<tbody>
+								<tr th:each="userOrder:${useOrders}">
+									<td th:text="${userOrder.OId}"></td>
+									<td th:text="${userOrder.roomType}"></td>
+									<td th:text="${userOrder.ATime}"></td>
+									<td th:text="${userOrder.LTime}"></td>
+									<td th:text="${userOrder.dayNum}"></td>
+									<td th:text="${userOrder.UNum}"></td>
+									<td th:text="${userOrder.UName}"></td>
+									<td th:text="${userOrder.UPhone}"></td>
+									<td th:text="${userOrder.UIDCard}"></td>
+									<td th:text="${userOrder.roomId}"></td>
+									<td th:text="${userOrder.roomFloor}"></td>
+									<td th:text="${userOrder.totalPrise}"></td>
+									<td th:text="${userOrder.OState}"></td>
 									<td>
-										<button class="btn btn-clean-dark">办理入住</button>
-										<button class="btn btn-clean-dark">办理退房</button>
+										<button class="btn btn-clean-dark" th:onclick="checkIn([[${userOrder.OId}]], [[${userOrder.OState}]]);">办理入住</button>
+										<button class="btn btn-clean-dark" th:onclick="checkOut([[${userOrder.OId}]], [[${userOrder.OState}]]);">办理退房</button>
 									</td>
 								</tr>
+								</tbody>
 							</table>
                        	</div> <!--/content-->
-                       	<div class="content" id="box3" align="center" style="display: none;">
-                			<h4 class="title">办理现订</h4>
-							<div class="note-block">
+                       	<div class="content" id="box3" align="center" style="display: none;background-color: #003e72">
+                			<h4 class="title" style="color: whitesmoke">办理现订</h4>
+							<div class="booking booking-inner">
+								<div class="container">
+									<div class="booking-wrapper">
+										<br>
+										<br>
+										<br>
+										<br>
+										<br>
+										<br>
+										<br>
+										<div class="row">
+											<!--=== date arrival ===-->
+											<div class="col-md-6">
+												<div class="date" id="dateArrival" data-text="到达日期">
+													<input id="aTime" class="datepicker" readonly="readonly" />
+													<div id="aTimeDate" class="date-value"></div>
+												</div>
+											</div>
 
-                                <div class="row">
-                                	<!-- === login-wrapper === -->
+											<!--=== date departure ===-->
+											<div class="col-md-6">
+												<div class="date" id="dateDeparture" data-text="离开日期">
+													<input id="lTime" class="datepicker" readonly="readonly" />
+													<div id="lTimeDate" class="date-value"></div>
+												</div>
+											</div>
+											<div class="col-md-12">
+												<hr>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<select class="form-control" id="roomType">
+														<option value="" selected="selected">--请选择房间类型--</option>
+														<option value="单人房">单人房</option>
+														<option value="双人房">双人房</option>
+														<option value="大床房">大床房</option>
+														<option value="家庭套房">家庭套房</option>
+														<option value="总统套房">总统套房</option>
+														<option value="豪华公寓">豪华公寓</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<input id="uNum" type="number" min="1" value="" class="form-control" placeholder="客人数量: *">
+												</div>
+											</div>
 
-                                    <div class="login-wrapper">
+											<div class="col-md-6">
+												<div class="form-group">
+													<input id="uName" type="text" value="" class="form-control" placeholder="客人名称: *">
+												</div>
+											</div>
 
-                                        <div class="white-block">
-                                        	
-                                        	<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<input id="uPhone" type="text" value="" class="form-control" placeholder="客人电话: *" onblur="checkPhone()">
+													<label id="phone_trip"></label>
+												</div>
+											</div>
 
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                    	<select class="form-control">
-                                                    		<option value="" selected="selected">--请选择房间类型--</option>
-  															<option value="单人房">单人房</option>
- 							 								<option value="双人房">双人房</option>
-  															<option value="大床房">大床房</option>
-  															<option value="家庭套房">家庭套房</option>
-  															<option value="总统套房">总统套房</option>
-  															<option value="豪华公寓">豪华公寓</option>
-                                                    	</select>
-                                                    </div>
-                                                </div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<input id="uIDCard" type="text" value="" class="form-control" placeholder="客人身份证号: *" onblur="checkIDCard()">
+													<label id="idCard_trip"></label>
+												</div>
+											</div>
 
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <input type="text" value="" class="form-control" placeholder="到达日期: *">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6">
-
-                                                    <div class="form-group">
-                                                        <input type="text" value="" class="form-control" placeholder="离开日期:">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <input type="text" value="" class="form-control" placeholder="客人数量: *">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <input type="text" value="" class="form-control" placeholder="客人名称: *">
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <input type="text" value="" class="form-control" placeholder="客人电话: *">
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <input type="text" value="" class="form-control" placeholder="客人身份证号: *">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-12">
-                                                    <a href="#" class="btn btn-main btn-block">现订</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!--/login-wrapper-->
-                                </div>
-                            </div>
+											<div class="col-md-12">
+												<a onclick="reservation()" class="btn btn-main btn-block">现订</a>
+											</div>
+										</div> <!--/row-->
+									</div><!--/booking-wrapper-->
+								</div> <!--/container-->
+							</div> <!--/booking-->
                        	</div> <!--/content-->
-                       	<div class="content" id="box4" align="center" style="display: none;">
-                			<h4 class="title">酒店房间</h4>
-                    		<table class="table table-hover table-striped table-bordered table-condensed">
+						<div class="content" id="box4" align="center" style="display: none;">
+							<h4 class="title">酒店房间</h4>
+							<table class="table table-hover table-striped table-bordered table-condensed">
+								<thead>
 								<tr>
 									<td>房间号</td>
 									<td>房间类型</td>
 									<td>房间楼层</td>
 									<td>状态</td>
 								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+								</thead>
+								<tbody>
+								<tr th:each="room:${rooms}">
+									<td th:text="${room.roomId}"></td>
+									<td th:text="${room.roomType}"></td>
+									<td th:text="${room.roomFloor}"></td>
+									<td th:text="${room.roomState}"></td>
 								</tr>
+								</tbody>
 							</table>
-                		</div>
+						</div>
     				</div>
     			</div>
     		</div>
@@ -383,7 +399,8 @@
         </footer>
 
     </div> <!--/wrapper-->
-
+		<form id="form">
+		</form>
     <!--JS files-->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.js"></script>
@@ -391,5 +408,187 @@
     <script src="js/jquery.magnific-popup.js"></script>
     <script src="js/jquery.owl.carousel.js"></script>
     <script src="js/main.js"></script>
+		<script th:inline="javascript">
+			function trip(obj, trip) {
+				document.getElementById(obj).innerHTML = "<b>" + trip + "</b>";
+			}
+			function checkIDCard() {
+				var id = document.getElementById("uIDCard");
+				var idCard = id.value;
+				if (!/(^\d{15}$)|(^\d{17}(\d|X)$)/.test(idCard)){
+					trip("idCard_trip", "身份证号格式不正确!!");
+					return false;
+				}else {
+					trip("idCard_trip", "");
+					return true;
+				}
+			}
+
+			function checkPhone() {
+				var num = document.getElementById("uPhone");
+				var phone = num.value;
+				if (phone === "") {
+					trip("phone_trip", "手机号不能为空!!");
+					return false;
+				}else {
+					trip("phone_trip", "");
+					return true;
+				}
+			}
+			function getATime() {
+				var aTimeDateDay = document.getElementById("aTimeDate").childNodes.item(0).innerText;
+				var aTimeDateMouth = document.getElementById("aTimeDate").childNodes.item(2).innerText;
+				var aTimeDateYear = document.getElementById("aTimeDate").childNodes.item(4).innerText;
+				var seperator1 = "-";
+				if (aTimeDateMouth >= 1 && aTimeDateMouth <= 9) {
+					aTimeDateMouth = "0" + aTimeDateMouth;
+				}
+				if (aTimeDateDay >= 0 && aTimeDateDay <= 9) {
+					aTimeDateDay = "0" + aTimeDateDay;
+				}
+				return aTimeDateYear + seperator1 + aTimeDateMouth + seperator1 + aTimeDateDay;
+			}
+			function getLTime() {
+				var lTimeDateDay = document.getElementById("lTimeDate").childNodes.item(0).innerText;
+				var lTimeDateMouth = document.getElementById("lTimeDate").childNodes.item(2).innerText;
+				var lTimeDateYear = document.getElementById("lTimeDate").childNodes.item(4).innerText;
+				var seperator1 = "-";
+				if (lTimeDateMouth >= 1 && lTimeDateMouth <= 9) {
+					lTimeDateMouth = "0" + lTimeDateMouth;
+				}
+				if (lTimeDateDay >= 0 && lTimeDateDay <= 9) {
+					lTimeDateDay = "0" + lTimeDateDay;
+				}
+				return lTimeDateYear + seperator1 + lTimeDateMouth + seperator1 + lTimeDateDay;
+			}
+			function getDay(aTime, lTime) {
+				var time1 = new Date(aTime);
+				var time2 = new Date(lTime);
+				return (time2-time1)/86400000;
+			}
+			function reservation() {
+				var rId = [[${rId}]];
+				var roomType = $("#roomType option:selected").val();
+				var aTime = getATime();
+				var lTime = getLTime();
+				var uNum = $("#uNum").val();
+				var uName = $("#uName").val();
+				var uPhone = $("#uPhone").val();
+				var uIDCard = $("#uIDCard").val();
+				var dayNum= getDay(aTime, lTime);
+				if (roomType === "单人房"){
+					var price = 99*dayNum;
+				}else if (roomType === "双人房"){
+					var price = 129*dayNum;
+				}else if (roomType === "大床房"){
+					var price = 159*dayNum;
+				}else if (roomType === "家庭套房"){
+					var price = 199*dayNum;
+				}else if (roomType === "总统套房"){
+					var price = 329*dayNum;
+				}else if (roomType === "豪华公寓"){
+					var price = 429*dayNum;
+				}
+				$.ajax({
+					async:false,
+					url : "/room/selectTypeRoom",
+					datatype : "String",
+					type : "post",
+					data:{
+						roomType:roomType, aTime:aTime, lTime:lTime
+					},success:function (res) {
+						if (res === true){
+							$.ajax({
+								async:false,
+								url : "/order/addROrder",
+								datatype : "String",
+								type : "post",
+								data:{
+									rId:rId, aTime:aTime, lTime:lTime, uNum:uNum, dayNum:dayNum, totalPrise:price, roomType:roomType, uName:uName, uPhone:uPhone, uIDCard:uIDCard
+								},success:function (res) {
+									if (res === true){
+										document.getElementById("form").action="/receptionistPage?rId="+rId;
+										document.getElementById("form").method="post";
+										document.getElementById("form").submit();
+									}else{
+										alert("添加订单失败");
+									}
+								},error:function () {
+									alert("失败");
+								}
+							});
+						}else{
+							alert("该时间段此类型的房间已满");
+						}
+					},error:function () {
+						alert("失败");
+					}
+				});
+			}
+			function checkIn(oId,oState) {
+				var rId = [[${rId}]];
+				if (oState === "已支付"){
+					document.getElementById("form").action="/checkInPage?oId="+oId+"&rId="+rId;
+					document.getElementById("form").method="post";
+					document.getElementById("form").submit();
+				}else {
+					alert("此订单不能办理入住");
+				}
+			}
+			function checkOut(oId,oState) {
+				var rId = [[${rId}]];
+				if (oState === "已入住"){
+					$.ajax({
+						async:false,
+						url : "/order/checkOut",
+						datatype : "String",
+						type : "post",
+						data:{
+							oId:oId
+						},success:function (res) {
+							if (res === true){
+								alert("办理成功");
+								document.getElementById("form").action="/receptionistPage?rId="+rId;
+								document.getElementById("form").method="post";
+								document.getElementById("form").submit();
+							}else{
+								alert("办理失败");
+							}
+						},error:function () {
+							alert("失败");
+						}
+					});
+				}else {
+					alert("此订单不能办理退房");
+				}
+			}
+			function unsubscribe(oId,oState) {
+				var rId = [[${rId}]];
+				if (oState === "已支付"){
+					$.ajax({
+						async:false,
+						url : "/order/unsubscribeR",
+						datatype : "String",
+						type : "post",
+						data:{
+							oId:oId
+						},success:function (res) {
+							if (res === true){
+								alert("办理成功");
+								document.getElementById("form").action="/receptionistPage?rId="+rId;
+								document.getElementById("form").method="post";
+								document.getElementById("form").submit();
+							}else{
+								alert("办理失败");
+							}
+						},error:function () {
+							alert("失败");
+						}
+					});
+				}else {
+					alert("此订单不能申请退订");
+				}
+			}
+		</script>
 	</body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -143,7 +143,7 @@
 
             <div class="page-header" style="background-image:url(images/header-1.jpg)">
                 <div class="container text-center">
-					<h2 class="title"><p th:text="${admin.aName}"></p></h2>
+					<h2 class="title"><p th:text="${admin.AName}"></p></h2>
                     <p>欢迎登录</p>
                 </div>
             </div>
@@ -153,8 +153,9 @@
                 	<div class="clearfix">
                 		<div class="content" id="box1" align="center" style="display: block;">
                     		<h4 class="title">房间管理</h4>
-                    		<a href="addRoom.html"><button class="btn btn-main btn-block">添加房间</button></a>
+                    		<a th:href="@{/addRoomPage(aId=${aId})}"><button class="btn btn-main btn-block">添加房间</button></a>
                     		<table class="table table-hover table-striped table-bordered table-condensed">
+								<thead>
 								<tr>
 									<td>房间号</td>
 									<td>房间类型</td>
@@ -163,43 +164,53 @@
 									<td>状态</td>
 									<td>操作</td>
 								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+								</thead>
+								<tbody>
+								<tr th:each="room:${rooms}">
+									<td th:text="${room.roomId}"></td>
+									<td th:text="${room.roomType}"></td>
+									<td th:text="${room.roomFloor}"></td>
+									<td th:text="${room.roomOrientation}"></td>
+									<td th:text="${room.roomState}"></td>
 									<td>
-										<a href="updateRoom.html"><button class="btn btn-clean-dark">修改房间</button></a>
-										<button class="btn btn-clean-dark">删除房间</button>
+										<a th:href="@{/updateRoomPage(roomId=${room.roomId}, aId=${aId})}"><button class="btn btn-clean-dark">修改房间</button></a>
+										<a><button class="btn btn-clean-dark" th:onclick="|deleteRoom(${room.roomId})|">删除房间</button></a>
 									</td>
 								</tr>
+								</tbody>
 							</table>
                 		</div>
                 		<div class="content" id="box2" align="center" style="display: none;">
                     		<h4 class="title">评论管理</h4>
                     		<table class="table table-hover table-striped table-bordered table-condensed">
+								<thead>
 								<tr>
+									<td>评论编号</td>
 									<td>评论人</td>
 									<td>评论时间</td>
 									<td>房间类型</td>
 									<td>评论内容</td>
 									<td>操作</td>
 								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+								</thead>
+								<tbody>
+								<tr th:each="comment:${comments}">
+									<td th:text="${comment.CId}"></td>
+									<td th:text="${comment.UName}"></td>
+									<td th:text="${comment.CTime}"></td>
+									<td th:text="${comment.roomType}"></td>
+									<td th:text="${comment.CContent}"></td>
 									<td>
-										<button class="btn btn-clean-dark">删除评论</button>
+										<button class="btn btn-clean-dark" th:onclick="|deleteComment(${comment.CId})|">删除评论</button>
 									</td>
 								</tr>
+								</tbody>
 							</table>
                 		</div>
                 		<div class="content" id="box3" align="center" style="display: none;">
                 			<h4 class="title">审核退订申请</h4>
 							<table class="table table-hover table-striped table-bordered table-condensed">
+								<thead>
 								<tr>
 									<td>订单号</td>
 									<td>房间类型</td>
@@ -214,22 +225,25 @@
 									<td>订单状态</td>
 									<td>操作</td>
 								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+								</thead>
+								<tbody>
+								<tr th:each="order:${orders}">
+									<td th:text="${order.OId}"></td>
+									<td th:text="${order.roomType}"></td>
+									<td th:text="${order.ATime}"></td>
+									<td th:text="${order.LTime}"></td>
+									<td th:text="${order.dayNum}"></td>
+									<td th:text="${order.UNum}"></td>
+									<td th:text="${order.UName}"></td>
+									<td th:text="${order.UPhone}"></td>
+									<td th:text="${order.UIDCard}"></td>
+									<td th:text="${order.totalPrise}"></td>
+									<td th:text="${order.OState}"></td>
 									<td>
-										<a href=""><button class="btn btn-clean-dark">退款</button></a>
+										<button class="btn btn-clean-dark" th:onclick="|refund(${order.OId})|">退款</button>
 									</td>
 								</tr>
+								</tbody>
 							</table>
                        	</div> <!--/content-->
     				</div>
@@ -279,7 +293,8 @@
         </footer>
 
     </div> <!--/wrapper-->
-
+		<form id="form">
+		</form>
     <!--JS files-->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.js"></script>
@@ -287,5 +302,88 @@
     <script src="js/jquery.magnific-popup.js"></script>
     <script src="js/jquery.owl.carousel.js"></script>
     <script src="js/main.js"></script>
+		<script th:inline="javascript">
+			function deleteRoom(roomId) {
+				var aId = [[${aId}]];
+				$.ajax({
+					async:false,
+					url : "/room/deleteRoom",
+					datatype : "String",
+					type : "post",
+					data:{
+						roomId:roomId
+					},success:function (res) {
+						if (res === true){
+							alert("删除成功");
+							document.getElementById("form").action="/adminPage?aId="+aId;
+							document.getElementById("form").method="post";
+							document.getElementById("form").submit();
+						}else{
+							alert("删除失败");
+						}
+					},error:function () {
+						alert("失败");
+					}
+				});
+			}
+			function deleteComment(cId) {
+				var aId = [[${aId}]];
+				$.ajax({
+					async:false,
+					url : "/comment/deleteComment",
+					datatype : "String",
+					type : "post",
+					data:{
+						cId:cId
+					},success:function (res) {
+						if (res === true){
+							alert("删除成功");
+							document.getElementById("form").action="/adminPage?aId="+aId;
+							document.getElementById("form").method="post";
+							document.getElementById("form").submit();
+						}else{
+							alert("删除失败");
+						}
+					},error:function () {
+						alert("失败");
+					}
+				});
+			}
+			function refund(oId) {
+				var aId = [[${aId}]];
+				$.ajax({
+					async:false,
+					url : "/refund",
+					datatype : "String",
+					type : "post",
+					data:{
+						oId:oId
+					},success:function () {
+						$.ajax({
+							async:false,
+							url : "/order/unsubscribeR",
+							datatype : "String",
+							type : "post",
+							data:{
+								oId:oId
+							},success:function (res) {
+								if (res === true){
+									alert("退款成功");
+									document.getElementById("form").action="/adminPage?aId="+aId;
+									document.getElementById("form").method="post";
+									document.getElementById("form").submit();
+								}else {
+									alert("退款失败");
+								}
+							},error:function () {
+								alert("失败");
+							}
+						});
+					},error:function () {
+						alert("失败");
+					}
+				});
+			}
+		</script>
 	</body>
 </html>

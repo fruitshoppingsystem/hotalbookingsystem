@@ -4,10 +4,41 @@
     <insert id="addUser" parameterType="com.sys.hotalbookingsystem.entity.User">
         insert into users (uEmail, uName, uPassword, uPhone, uIDCard) values (#{uEmail}, #{uName}, #{uPassword}, #{uPhone}, #{uIDCard})
     </insert>
+    <delete id="deleteUser" parameterType="string">
+        delete users where uEmail = #{uEmail}
+    </delete>
+    <update id="updateUser" parameterType="com.sys.hotalbookingsystem.entity.User">
+        update users
+        <set>
+            <if test="uName != null">
+                uName = #{uName},
+            </if>
+
+            <if test="uSex != null">
+                uSex = #{uSex},
+            </if>
+
+            <if test="uAge != null">
+                uAge = #{uAge},
+            </if>
+
+            <if test="uPhone != null">
+                uPhone = #{uPhone},
+            </if>
+
+            <if test="uIDCard != null">
+                uIDCard = #{uIDCard},
+            </if>
+        </set>
+        where uEmail = #{uEmail}
+    </update>
     <select id="findUserByEmail" parameterType="string" resultType="int">
         select count(*) from users where uEmail = #{uEmail}
     </select>
     <select id="selectPasswordByEmail" parameterType="string" resultType="string">
-        select uPassword from users where uEmail = #{uEmail}
+    select uPassword from users where uEmail = #{uEmail}
+</select>
+    <select id="selectUserByEmail" parameterType="string" resultType="com.sys.hotalbookingsystem.entity.User">
+        select * from users where uEmail = #{uEmail}
     </select>
 </mapper>

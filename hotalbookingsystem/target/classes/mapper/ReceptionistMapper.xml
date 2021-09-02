@@ -7,4 +7,7 @@
     <select id="selectPasswordById" parameterType="int" resultType="string">
         select rPassword from receptionists where rId = #{rId}
     </select>
+    <select id="selectNameById" parameterType="int" resultType="string">
+        select rName from receptionists where rId = #{rId}
+    </select>
 </mapper>

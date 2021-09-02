@@ -19,4 +19,23 @@ public class User {
         this.uPhone = uPhone;
         this.uIDCard = uIDCard;
     }
+
+    public User(String uEmail, String uName, String uSex, int uAge, String uPhone, String uIDCard) {
+        this.uEmail = uEmail;
+        this.uName = uName;
+        this.uSex = uSex;
+        this.uAge = uAge;
+        this.uPhone = uPhone;
+        this.uIDCard = uIDCard;
+    }
+
+    public User(String uEmail, String uName, String uPassword, String uSex, int uAge, String uPhone, String uIDCard) {
+        this.uEmail = uEmail;
+        this.uName = uName;
+        this.uPassword = uPassword;
+        this.uSex = uSex;
+        this.uAge = uAge;
+        this.uPhone = uPhone;
+        this.uIDCard = uIDCard;
+    }
 }

@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -73,10 +73,6 @@
                             <i class="glyphicon glyphicon-log-in"></i> 
                             	登录
                         </a>
-                        <a class="box" href="user.html">
-                            <i class="glyphicon glyphicon-user"></i> 
-                            	个人界面
-                        </a>
                     </div>
                 </nav>
 
@@ -119,7 +115,7 @@
 
                         <ul class="navigation-right">
                             <li>
-                                <a href="userComment.html">用户评论 </a>
+                                <a href="/userCommentPage">用户评论 </a>
                             </li>
                             <li>
                                 <a href="rooms-category.html">房间分类 <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
@@ -200,94 +196,34 @@
 
                                             <!--signin-->
 
-                                            <div class="login-block login-block-signin">
-
-                                                <div class="h4">登录 <a href="javascript:void(0);" class="btn btn-main btn-xs btn-register pull-right">添加订单</a></div>
-
-                                                <hr />
-
-                                                <div class="row">
-
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <input type="email" value="" class="form-control" placeholder="邮箱">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <input type="password" value="" class="form-control" placeholder="密码">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-xs-6 text-right">
-                                                        <a href="reservation-2.html" class="btn btn-main">登录</a>
-                                                    </div>
-                                                </div>
-                                            </div> <!--/signin-->
-                                            <!--signup-->
-
                                             <div class="login-block login-block-signup">
-
-                                                <div class="h4">注册 <a href="javascript:void(0);" class="btn btn-main btn-xs btn-login pull-right">登录</a></div>
-
+                                                <div class="h4">登录 </div>
                                                 <hr />
-
                                                 <div class="row">
-
                                                     <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <input type="email" value="" class="form-control" placeholder="邮箱: *">
+                                                        <div class="form-group">
+                                                            <input id="email" type="email" value="" class="form-control" placeholder="邮箱">
+                                                            <label id="email_trip"></label>
+                                                        </div>
                                                     </div>
-                                                </div>
-
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <input type="text" value="" class="form-control" placeholder="用户名: *">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <input id="password" type="password" value="" class="form-control" placeholder="密码">
+                                                            <label id="password_trip"></label>
+                                                        </div>
                                                     </div>
-                                                </div>
-
-                                                <div class="col-md-6">
-
-                                                    <div class="form-group">
-                                                        <input type="text" value="" class="form-control" placeholder="密码:">
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <img id="codeImg" src="/code/getCode" alt="更换验证码" onclick="getCode()">
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <input type="text" value="" class="form-control" placeholder="重复密码: *">
+                                                    <div class="col-md-10">
+                                                        <div class="form-group">
+                                                            <input id="code" type="text" value="" class="form-control" placeholder="验证码" onblur="checkCode()">
+                                                            <label id="code_trip"></label>
+                                                        </div>
                                                     </div>
-                                                </div>
-
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <input type="text" value="" class="form-control" placeholder="身份证号: *">
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <input type="text" value="" class="form-control" placeholder="电话: *">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-2">
-                                                    <div class="form-group">
-                                                        <input type="button" value="发送验证码" class="form-control">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-10">
-                                                    <div class="form-group">
-                                                        <input type="text" value="" class="form-control" placeholder="验证码: *">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-12">
-                                                    <a href="#" class="btn btn-main btn-block">注册</a>
-                                                </div>
-
                                                 </div>
                                             </div> <!--/signup-->
                                         </div>
@@ -317,22 +253,22 @@
 
                                 <div class="cart-block cart-block-item clearfix">
                                     <div class="image">
-                                        <a href="room-overview.html"><img src="images/room-4.jpg" alt="" /></a>
+                                        <a><img th:src="${image}" alt="" /></a>
                                     </div>
                                     <div class="title">
-                                        <div class="h2"><a href="room-overview.html">总统套房</a></div>
-                                        <div>
-                                            <strong>到达时间</strong> <a>(September 22, 2017)</a>
-                                        </div>
-                                        <div>
-                                            <strong>客人数量</strong> 2 Adults, 1 Child
-                                        </div>
-                                        <div>
-                                            <strong>预订天数</strong> 7
-                                        </div>
+                                        <div class="h2"><a th:href="${href}" th:text="${roomType}"></a></div>
+                                        <p>
+                                            <strong>到达时间</strong> <br /> <a th:text="${aTime}"></a>
+                                        </p>
+                                        <p>
+                                            <strong>客人数量</strong> <br />  <a th:text="${uNum}"></a>
+                                        </p>
+                                        <p>
+                                            <strong>预订天数</strong> <br /> <a th:text="${dayNum}"></a>
+                                        </p>
                                     </div>
                                     <div class="price">
-                                        <span class="final h3">￥ 1.998</span>
+                                        <span class="final h3" th:text="${price}"></span>
                                     </div>
                                 </div>
 
@@ -343,10 +279,10 @@
                             <div class="clearfix">
                                 <div class="cart-block cart-block-footer cart-block-footer-price clearfix">
                                     <div>
-                                        <a href="reservation-1.html" class="btn btn-clean-dark">返回</a>
+                                        <a onclick="back()" class="btn btn-clean-dark">返回</a>
                                     </div>
                                     <div>
-                                        <a href="reservation-3.html" class="btn btn-main">支付 <span class="icon icon-chevron-right"></span></a>
+                                        <a onclick="submit()" class="btn btn-main">支付 <span class="icon icon-chevron-right"></span></a>
                                     </div>
                                 </div>
                             </div>
@@ -403,7 +339,9 @@
         </footer>
 
     </div> <!--/wrapper-->
+    <form id="form">
 
+    </form>
     <!--JS files-->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.js"></script>
@@ -411,6 +349,144 @@
     <script src="js/jquery.magnific-popup.js"></script>
     <script src="js/jquery.owl.carousel.js"></script>
     <script src="js/main.js"></script>
+    <script th:inline="javascript">
+        function back() {
+            var roomType = [[${roomType}]];
+            var aTime = [[${aTime}]];
+            var lTime = [[${lTime}]];
+            var uNum = [[${uNum}]];
+            var dayNum = [[${dayNum}]];
+            var price = [[${price}]];
+            var image = [[${image}]];
+            var href = [[${href}]];
+            document.getElementById("form").action="/reservation1Page?roomType="+roomType+"&aTime="+aTime+"&lTime="+lTime+"&uNum="+uNum+"&dayNum="+dayNum+"&price="+price+"&image="+image+"&href="+href;
+            document.getElementById("form").method="post";
+            document.getElementById("form").submit();
+        }
+        function getCode() {
+            $("#code").val("");
+            $("#codeImg").attr("src", 'code/getCode?' + Math.random());
+        }
+
+        function trip(obj, trip) {
+            document.getElementById(obj).innerHTML = "<b>" + trip + "</b>";
+        }
+
+        function checkInput() {
+            //校验邮箱:/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/
+            var inputEmail = document.getElementById("email");
+            var uEmail = inputEmail.value;
+            if (!/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/.test(uEmail)) {
+                trip("email_trip", "邮箱不合法!!");
+                return false;
+            } else {
+                trip("email_trip", "");
+                return true;
+            }
+        }
+
+        function checkPassword() {
+            //密码长度6~18
+            var password = document.getElementById("password");
+            var pass = password.value;
+            if (pass.length < 6|| pass.length > 18) {
+                trip("password_trip", "密码为6~18位!!");
+                return false;
+            } else {
+                trip("password_trip", "");
+                return true;
+            }
+        }
+
+        function checkCode() {
+            var value = document.getElementById("code");
+            var code = value.value;
+            if (code.length !== 4) {
+                trip("code_trip", "验证码为4位!!");
+                return false;
+            } else {
+                trip("code_trip", "");
+                return true;
+            }
+        }
+
+        function checkForm() {
+            if (checkInput() && checkPassword() && checkCode()){
+                return true;
+            }else {
+                alert("格式错误");
+                return false;
+            }
+        }
+
+        function submit() {
+            var code=$("#code").val();
+            var radio = $("input[name='type']:checked").val();
+            $.ajax({
+                async: true,
+                type: 'post',
+                url: '/code/checkCode',
+                dataType:'json',
+                data: {
+                    code: code
+                },
+                success: function (res) {
+                    if (res === true){
+                        userLogin();
+                    }else {
+                        alert("验证码错误");
+                        getCode();
+                    }
+                },
+                error: function (){
+                    alert("失败");
+                }
+            });
+        }
+        function userLogin() {
+            if (checkForm()){
+                var uEmail=$("#email").val();
+                var uPassword=$("#password").val();
+                $.ajax({
+                    async:false,
+                    url : "/user/userLogin",
+                    datatype : "String",
+                    type : "post",
+                    data:{
+                        uEmail:uEmail, uPassword:uPassword
+                    },success:function (res) {
+                        if (res === true){
+                            var roomType = [[${roomType}]];
+                            var aTime = [[${aTime}]];
+                            var lTime = [[${lTime}]];
+                            var uNum = [[${uNum}]];
+                            var dayNum = [[${dayNum}]];
+                            var price = [[${price}]];
+                            $.ajax({
+                                async:false,
+                                url : "/order/addOrder",
+                                datatype : "String",
+                                type : "post",
+                                data:{
+                                    uEmail:uEmail, aTime:aTime, lTime:lTime, uNum:uNum, dayNum:dayNum, totalPrise:price, roomType:roomType
+                                },success:function (oId) {
+                                    document.getElementById("form").action="/pay?oId="+oId;
+                                    document.getElementById("form").method="post";
+                                    document.getElementById("form").submit();
+                                },error:function () {
+                                    alert("失败");
+                                }
+                            });
+                        }else{
+                            alert("邮箱或密码错误");
+                        }
+                    },error:function () {
+                        alert("失败");
+                    }
+                });
+            }
+        }
+    </script>
 </body>
 
 </html>

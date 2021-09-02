@@ -14,7 +14,7 @@
                 roomType = #{roomType},
             </if>
 
-            <if test="roomFloor != roomFloor">
+            <if test="roomFloor != null">
                 roomFloor = #{roomFloor},
             </if>
 
@@ -24,10 +24,25 @@
         </set>
         where roomId = #{roomId}
     </update>
+    <update id="updateState">
+        update rooms set roomState = #{roomState} where roomId = #{roomId}
+    </update>
     <select id="selectAllRooms" resultType="com.sys.hotalbookingsystem.entity.Room">
-        select * from rooms
+        select * from rooms where roomId != 0
     </select>
-    <select id="selectRoomByState" parameterType="string" resultType="com.sys.hotalbookingsystem.entity.Room">
-        select * from rooms where roomState = #{roomState}
+    <select id="selectRoomByType" parameterType="string" resultType="com.sys.hotalbookingsystem.entity.Room">
+        select * from rooms where roomType = #{roomType}
+    </select>
+    <select id="selectRoomIdByType" parameterType="string" resultType="int">
+        select roomId from rooms where roomType = #{roomType} and roomState = '空闲'
+    </select>
+    <select id="selectRoomById" parameterType="int" resultType="com.sys.hotalbookingsystem.entity.Room">
+        select * from rooms where roomId = #{roomId}
+    </select>
+    <select id="selectStateById" parameterType="int" resultType="string">
+        select roomState from rooms where roomId = #{roomId}
+    </select>
+    <select id="selectRoomNumByType" parameterType="string" resultType="int">
+        select count(*) from rooms where roomType = #{roomType}
     </select>
 </mapper>

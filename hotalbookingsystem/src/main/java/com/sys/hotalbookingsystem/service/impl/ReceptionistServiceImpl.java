@@ -20,4 +20,9 @@ public class ReceptionistServiceImpl implements ReceptionistService {
     public String selectPasswordById(int rId) {
         return receptionistDao.selectPasswordById(rId);
     }
+
+    @Override
+    public String selectNameById(int rId) {
+        return receptionistDao.selectNameById(rId);
+    }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -62,7 +62,7 @@
                     <!-- navigation-top-right -->
 
                     <div class="navigation-top-right">
-                        <a class="box" href="user.html">
+                        <a class="box" onclick="back()">
                             <i class="glyphicon glyphicon-menu-left"></i> 
                             	返回
                         </a>
@@ -170,15 +170,14 @@
                                     <!-- === add comment === -->
 
                                     <div class="comment-add">
-                                        <form action="#" method="post">
+                                        <form>
                                             <div class="form-group">
-                                                <textarea rows="10" class="form-control" placeholder="您的评论" required="required"></textarea>
+                                                <textarea id="cContent" rows="10" class="form-control" placeholder="您的评论" required="required"></textarea>
                                             </div>
                                             <div class="clearfix text-center">
-                                                <input type="submit" class="btn btn-main" value="添加评论" />
+                                                <input type="submit" class="btn btn-main" value="添加评论" onclick="addComment()"/>
                                             </div>
                                         </form>
-
                                     </div><!--/comment-add-->
                                 </div> <!--/comments-->
 
@@ -230,7 +229,8 @@
         </footer>
 
     </div> <!--/wrapper-->
-
+        <form id="form">
+        </form>
     <!--JS files-->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.js"></script>
@@ -238,5 +238,55 @@
     <script src="js/jquery.magnific-popup.js"></script>
     <script src="js/jquery.owl.carousel.js"></script>
     <script src="js/main.js"></script>
+        <script th:inline="javascript">
+            function back() {
+                var uEmail = [[${uEmail}]];
+                document.getElementById("form").action="/userPage?uEmail="+uEmail;
+                document.getElementById("form").method="post";
+                document.getElementById("form").submit();
+            }
+            function getNowFormatDate() {
+                var date = new Date();
+                var seperator1 = "-";
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1;
+                var strDate = date.getDate();
+                if (month >= 1 && month <= 9) {
+                    month = "0" + month;
+                }
+                if (strDate >= 0 && strDate <= 9) {
+                    strDate = "0" + strDate;
+                }
+                return year + seperator1 + month + seperator1 + strDate;
+            }
+            function addComment() {
+                var uEmail = [[${uEmail}]];
+                var uName = [[${uName}]];
+                var roomId = [[${roomId}]];
+                var roomType = [[${roomType}]];
+                var cTime = getNowFormatDate();
+                var cContent = $("#cContent").val();
+                $.ajax({
+                    async:false,
+                    url : "/comment/addComment",
+                    datatype : "json",
+                    type : "post",
+                    data:{
+                        uEmail:uEmail, roomId:roomId, cTime:cTime, cContent:cContent, uName:uName,  roomType:roomType
+                    },success:function (res) {
+                        if (res === true){
+                            alert("评论成功");
+                            document.getElementById("form").action="/userPage?uEmail="+uEmail;
+                            document.getElementById("form").method="post";
+                            document.getElementById("form").submit();
+                        }else{
+                            alert("评论失败");
+                        }
+                    },error:function () {
+                        alert("失败");
+                    }
+                });
+            }
+        </script>
 	</body>
 </html>

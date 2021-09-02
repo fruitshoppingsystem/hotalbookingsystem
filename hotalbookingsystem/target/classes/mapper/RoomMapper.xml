@@ -1,4 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sys.hotalbookingsystem.dao.RoomDao">
+    <insert id="addRoom" parameterType="com.sys.hotalbookingsystem.entity.Room">
+        insert into rooms values (#{roomId},#{roomType},#{roomFloor},#{roomOrientation},#{roomState})
+    </insert>
+    <delete id="deleteRoom" parameterType="int">
+        delete from rooms where roomId = #{roomId}
+    </delete>
+    <update id="updateRoom" parameterType="com.sys.hotalbookingsystem.entity.Room">
+        update rooms
+        <set>
+            <if test="roomType != null">
+                roomType = #{roomType},
+            </if>
+
+            <if test="roomFloor != null">
+                roomFloor = #{roomFloor},
+            </if>
+
+            <if test="roomOrientation != null">
+                roomOrientation = #{roomOrientation},
+            </if>
+        </set>
+        where roomId = #{roomId}
+    </update>
+    <update id="updateState">
+        update rooms set roomState = #{roomState} where roomId = #{roomId}
+    </update>
+    <select id="selectAllRooms" resultType="com.sys.hotalbookingsystem.entity.Room">
+        select * from rooms where roomId != 0
+    </select>
+    <select id="selectRoomByType" parameterType="string" resultType="com.sys.hotalbookingsystem.entity.Room">
+        select * from rooms where roomType = #{roomType}
+    </select>
+    <select id="selectRoomIdByType" parameterType="string" resultType="int">
+        select roomId from rooms where roomType = #{roomType} and roomState = '空闲'
+    </select>
+    <select id="selectRoomById" parameterType="int" resultType="com.sys.hotalbookingsystem.entity.Room">
+        select * from rooms where roomId = #{roomId}
+    </select>
+    <select id="selectStateById" parameterType="int" resultType="string">
+        select roomState from rooms where roomId = #{roomId}
+    </select>
+    <select id="selectRoomNumByType" parameterType="string" resultType="int">
+        select count(*) from rooms where roomType = #{roomType}
+    </select>
 </mapper>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -119,7 +119,7 @@
 
                         <ul class="navigation-right">
                             <li>
-                                <a href="userComment.html">用户评论 </a>
+                                <a href="/userCommentPage">用户评论 </a>
                             </li>
                             <li>
                                 <a href="rooms-category.html">房间分类 <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
@@ -161,67 +161,38 @@
 
             <div class="blog blog-item">
                 <div class="container">
-
                     <div class="row">
 
                         <!-- === blog-content === -->
-
                             <article>
 
                                 <!-- === blog comments === -->
-
                                 <div class="comments">
 
                                     <!-- === comment header === -->
-
                                     <div class="comment-header">
-                                        
                                     </div>
 
                                     <div class="comment-wrapper">
-
                                         <!-- === comment === -->
 
-                                        <div class="comment-block">
+                                        <div class="comment-block" th:each="comment:${comments}">
                                             <div class="comment-user">
                                                 <div>
-                                                    <h5>
-                                                                                                                 柚子不甜
-                                                        <small>03.05.2021</small>
-                                                    </h5>
+                                                    <h5 th:text="'评论人：'+${comment.UName}"></h5>
+                                                    <small th:text="${comment.CTime}"></small>
+                                                    <small th:text="${comment.roomType}"></small>
                                                 </div>
                                             </div>
 
                                             <!-- comment description -->
-
                                             <div class="comment-desc">
-                                                <p>
-                                                                                                   环境干净整洁卫生，交通便利停车很方便，工作人员很热情，设施用品都很齐全，这个价格来说已经是超值了，下次还会再来的
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <!-- === comment === -->
-
-                                        <div class="comment-block">
-                                            <div class="comment-user">
-                                                <div>
-                                                    <h5>
-                                                        28岁离异辣妈
-                                                        <small>21.03.2017</small>
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                            <div class="comment-desc">
-                                                <p>
-                                                                                                                                        来这附近办事，在网上选择了这家酒店，总体感觉不错，位置很方便，房间楼层也不算高，房间比较大，有标准的卫生间，厨房，冰箱，洗衣机，空调
-                                                </p>
+                                                <p th:text="'评论内容：'+${comment.CContent}"></p>
                                             </div>
                                         </div>
                                     </div><!--/comment-wrapper-->
 
                                     <div class="comment-header">
-                                        
                                     </div> <!--/comment-header-->     
                                 </div> <!--/comments-->
                             </article>
@@ -279,7 +250,6 @@
     <script src="js/jquery.magnific-popup.js"></script>
     <script src="js/jquery.owl.carousel.js"></script>
     <script src="js/main.js"></script>
-
 </body>
 
 </html>

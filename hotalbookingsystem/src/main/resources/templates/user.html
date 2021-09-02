@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -85,7 +85,7 @@
                             <i class="glyphicon glyphicon-log-out"></i> 
                             	退出登录
                         </a>
-                        <a class="box" href="index.html">
+                        <a class="box" onclick="deleteUser()">
                             <i class="glyphicon glyphicon-trash"></i> 
                             	注销账号
                         </a>
@@ -116,9 +116,6 @@
                         <!-- navigation-left -->
 
                         <ul class="navigation-left" role="tablist">
-                            <li>
-                                <a href="index.html">首页 </a>
-                            </li>
                             <li role="presentation" class="active">
                                 <a id="showbox1">个人信息 </a>
                             </li>
@@ -148,7 +145,7 @@
 
             <div class="page-header" style="background-image:url(images/header-1.jpg)">
                 <div class="container text-center">
-                    <h2 class="title">用户名</h2>
+                    <h2 class="title" th:text="${user.UName}">用户名</h2>
                     <p>欢迎登录</p>
                 </div>
             </div>
@@ -157,23 +154,24 @@
                 <div class="container">
                 	<div class="clearfix">
                 		<div class="content" id="box1" align="center" style="display: block;">
-                    		<label>用户名：</label><br />
-							<label>性别：</label><br />
-							<label>年龄：</label><br />
-							<label>电话：</label><br />
-							<label>身份证号：</label><br />
+                    		<label>用户名：</label><p th:text="${user.UName}"></p><br />
+							<label>性别：</label><p th:text="${uSex}"></p><br />
+							<label>年龄：</label><p th:text="${uAge}"></p><br />
+							<label>电话：</label><p th:text="${user.UPhone}"></p><br />
+							<label>身份证号：</label><p th:text="${user.UIDCard}"></p><br />
 							<button type="button" class="btn btn-clean-dark" id="showbox2">修改信息</button>
                 		</div>
                 		<div class="content" id="box2" align="center" style="display: none;">
-                    		<label>用户名：<input id="userName" type="text" value=""></label><br />
-							<label>性别：<input id="sex" type="text" value=""></label><br />
-							<label>年龄：<input id="age" type="text" value=""></label><br />
-							<label>电话：<input id="pgone" type="text" value=""></label><br />
-							<label>身份证号：<input id="IDCard" type="text" value=""></label><br />
-							<a class="btn btn-clean-dark">确定</a>
+                    		<label>用户名：<input id="name" type="text" th:value="${user.UName}"></label><br />
+							<label>性别：<input id="sex" type="text" th:value="${uSex}"></label><br />
+							<label>年龄：<input id="age" type="text" th:value="${uAge}"></label><br />
+							<label>电话：<input id="phone" type="text" th:value="${user.UPhone}"></label><br />
+							<label>身份证号：<input id="idCard" type="text" th:value="${user.UIDCard}"></label><br />
+							<a class="btn btn-clean-dark" onclick="updateUser()">确定修改</a>
                 		</div>
                 		<div class="content" id="box3" align="center" style="display: none;">
 							<table class="table table-hover table-striped table-bordered table-condensed">
+                                <thead>
 								<tr>
 									<td>订单号</td>
 									<td>房间类型</td>
@@ -182,23 +180,30 @@
 									<td>预订天数</td>
 									<td>客人数量</td>
 									<td>总金额</td>
+                                    <td>房间号</td>
+                                    <td>房间楼层</td>
 									<td>订单状态</td>
 									<td>操作</td>
 								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td>
-										<a href="comment.html"><button class="btn btn-clean-dark">评论</button></a>
-										<button class="btn btn-clean-dark">申请退订</button>
-									</td>
-								</tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="order:${orders}">
+                                    <td th:text="${order.OId}"></td>
+                                    <td th:text="${order.roomType}"></td>
+                                    <td th:text="${order.ATime}"></td>
+                                    <td th:text="${order.LTime}"></td>
+                                    <td th:text="${order.dayNum}"></td>
+                                    <td th:text="${order.UNum}"></td>
+                                    <td th:text="${order.totalPrise}"></td>
+                                    <td th:text="${order.roomId}"></td>
+                                    <td th:text="${order.roomFloor}"></td>
+                                    <td th:text="${order.OState}"></td>
+                                    <td>
+                                        <button class="btn btn-clean-dark" th:onclick="comment([[${order.roomId}]], [[${order.roomType}]], [[${order.OState}]]);">评论</button>
+                                        <button class="btn btn-clean-dark" th:onclick="unsubscribe([[${order.OId}]], [[${order.OState}]]);">申请退订</button>
+                                    </td>
+                                </tr>
+                                </tbody>
 							</table>
                        	</div> <!--/content-->
     				</div>
@@ -248,7 +253,8 @@
         </footer>
 
     </div> <!--/wrapper-->
-
+        <form id="form">
+        </form>
     <!--JS files-->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.js"></script>
@@ -256,5 +262,96 @@
     <script src="js/jquery.magnific-popup.js"></script>
     <script src="js/jquery.owl.carousel.js"></script>
     <script src="js/main.js"></script>
+        <script th:inline="javascript">
+            function updateUser() {
+                var uEmail = [[${uEmail}]];
+                var uName = $("#name").val();
+                var uSex = $("#sex").val();
+                var uAge = $("#age").val();
+                var uPhone = $("#phone").val();
+                var uIDCard = $("#idCard").val();
+                $.ajax({
+                    async:false,
+                    url : "/user/updateUser",
+                    datatype : "String",
+                    type : "post",
+                    data:{
+                        uEmail:uEmail,uName:uName, uSex:uSex, uAge:uAge, uPhone:uPhone, uIDCard:uIDCard
+                    },success:function (res) {
+                        if (res === true){
+                            alert("修改成功");
+                            document.getElementById("form").action="/userPage?uEmail="+uEmail;
+                            document.getElementById("form").method="post";
+                            document.getElementById("form").submit();
+                        }else{
+                            alert("修改失败");
+                        }
+                    },error:function () {
+                        alert("失败");
+                    }
+                });
+            }
+            function deleteUser() {
+                var uEmail = [[${uEmail}]];
+                $.ajax({
+                    async:false,
+                    url : "/user/deleteUser",
+                    datatype : "String",
+                    type : "post",
+                    data:{
+                        uEmail:uEmail
+                    },success:function (res) {
+                        if (res === true){
+                            alert("注销成功");
+                            document.getElementById("form").action="/indexPage";
+                            document.getElementById("form").method="post";
+                            document.getElementById("form").submit();
+                        }else{
+                            alert("注销失败");
+                        }
+                    },error:function () {
+                        alert("失败");
+                    }
+                });
+            }
+            function comment(roomId, roomType, oState) {
+                var uEmail = [[${uEmail}]];
+                var uName = [[${user.UName}]];
+                if (oState !== "已退房"){
+                    alert("请退房后评论");
+                }else {
+                    document.getElementById("form").action="/commentPage?uEmail="+uEmail+"&uName="+uName+"&roomId="+roomId+"&roomType="+roomType;
+                    document.getElementById("form").method="post";
+                    document.getElementById("form").submit();
+                }
+            }
+            function unsubscribe(oId, oState) {
+                var uEmail = [[${uEmail}]];
+                if (oState !== "已支付"){
+                    alert("此订单不能申请退订");
+                }else {
+                    $.ajax({
+                        async:false,
+                        url : "/order/unsubscribe",
+                        datatype : "String",
+                        type : "post",
+                        data:{
+                            oId:oId
+                        },success:function (res) {
+                            if (res === true){
+                                alert("申请成功");
+                                document.getElementById("form").action="/userPage?uEmail="+uEmail;
+                                document.getElementById("form").method="post";
+                                document.getElementById("form").submit();
+                            }else{
+                                alert("申请失败");
+                            }
+                        },error:function () {
+                            alert("失败");
+                        }
+                    });
+                }
+            }
+        </script>
 	</body>
 </html>
