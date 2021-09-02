@@ -7238,7 +7238,7 @@ function Datepicker() {
 		currentText: "Today", // Display text for current month link
 		monthNames: [ "一月","二月","三月","四月","五月","六月",
 			"七月","八月","九月","十月","十一月","十二月" ], // Names of months for drop-down and formatting
-		monthNamesShort: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ], // For formatting
+		monthNamesShort: [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" ], // For formatting
 		dayNames: [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ], // For formatting
 		dayNamesShort: [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ], // For formatting
 		dayNamesMin: [ "日","一","二","三","四","五","六" ], // Column headings for days starting at Sunday

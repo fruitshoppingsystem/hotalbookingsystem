@@ -33,4 +33,17 @@ public class UserController {
         }
         return false;
     }
+    @RequestMapping("/updateUser")
+    @ResponseBody
+    public Boolean updateUser(String uEmail, String uName,  String uSex,  int uAge,  String uPhone, String uIDCard){
+        User user = new User(uEmail, uName, uSex, uAge, uPhone, uIDCard);
+        userService.updateUser(user);
+        return true;
+    }
+    @RequestMapping("/deleteUser")
+    @ResponseBody
+    public Boolean deleteUser(String uEmail){
+        userService.deleteUser(uEmail);
+        return true;
+    }
 }

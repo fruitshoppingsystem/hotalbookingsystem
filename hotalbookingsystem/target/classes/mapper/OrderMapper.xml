@@ -1,4 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sys.hotalbookingsystem.dao.OrderDao">
+    <insert id="addOrder" parameterType="com.sys.hotalbookingsystem.entity.Order">
+        insert into orders (uEmail, aTime, lTime, uNum, dayNum, totalPrise, roomType, uName, uPhone, uIDCard, oState) values (#{uEmail}, #{aTime}, #{lTime}, #{uNum}, #{dayNum}, #{totalPrise}, #{roomType}, #{uName}, #{uPhone}, #{uIDCard}, #{oState})
+    </insert>
+    <insert id="addROrder" parameterType="com.sys.hotalbookingsystem.entity.Order">
+        insert into orders (aTime, lTime, uNum, dayNum, totalPrise, roomType, uName, uPhone, uIDCard, oState, rId) values (#{aTime}, #{lTime}, #{uNum}, #{dayNum}, #{totalPrise}, #{roomType}, #{uName}, #{uPhone}, #{uIDCard}, #{oState}, #{rId})
+    </insert>
+    <update id="updateState">
+        update orders set oState = #{oState} where oId = #{oId}
+    </update>
+    <update id="checkIn">
+        update orders set roomId = #{roomId}, roomFloor = #{roomFloor} where oId = #{oId}
+    </update>
+    <select id="selectUserOrders" parameterType="string" resultType="com.sys.hotalbookingsystem.entity.Order">
+        select oId,uEmail,roomId,aTime,lTime,uNum,dayNum,totalPrise,roomType,roomFloor,uName,uPhone,uIDCard,oState from orders where uEmail = #{uEmail} and oState != '已预定'
+    </select>
+    <select id="selectReceptionistOrders" parameterType="int" resultType="com.sys.hotalbookingsystem.entity.Order">
+        select oId,uEmail,roomId,aTime,lTime,uNum,dayNum,totalPrise,roomType,roomFloor,uName,uPhone,uIDCard,oState from orders where rId = #{rId}
+    </select>
+    <select id="selectNotReceptionistOrders" resultType="com.sys.hotalbookingsystem.entity.Order">
+        select oId,uEmail,roomId,aTime,lTime,uNum,dayNum,totalPrise,roomType,roomFloor,uName,uPhone,uIDCard,oState from orders where rId is null and oState = '已付款' or oState = '已入住' or oState = '已退房'
+    </select>
+    <select id="selectTypeOrders" parameterType="string" resultType="com.sys.hotalbookingsystem.entity.Order">
+        select oId,uEmail,aTime,lTime,uNum,dayNum,totalPrise,roomType,uName,uPhone,uIDCard,oState from orders where roomType = #{roomType} and oState = "已支付"
+    </select>
+    <select id="selectUnsubscribeOrder" resultType="com.sys.hotalbookingsystem.entity.Order">
+        select oId,uEmail,aTime,lTime,uNum,dayNum,totalPrise,roomType,uName,uPhone,uIDCard,oState from orders where oState = "申请退订"
+    </select>
+    <select id="selectMaxId" resultType="int">
+        select max(oId) from orders
+    </select>
+    <select id="selectOrderById" parameterType="int" resultType="com.sys.hotalbookingsystem.entity.Order">
+        select oId,uEmail,roomId,aTime,lTime,uNum,dayNum,totalPrise,roomType,roomFloor,uName,uPhone,uIDCard,oState from orders where oId = #{oId}
+    </select>
 </mapper>

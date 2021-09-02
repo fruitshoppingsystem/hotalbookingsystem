@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -61,7 +61,7 @@
                     <!-- navigation-top-right -->
 
                     <div class="navigation-top-right">
-                    	<a class="box" href="admin.html">
+                    	<a class="box" onclick="back()">
                             <i class="glyphicon glyphicon-menu-left"></i> 
                             	返回
                         </a>
@@ -107,7 +107,7 @@
 
                         <ul class="navigation-right">
                             <li>
-                                <a href="userComment.html">用户评论 </a>
+                                <a href="/userCommentPage">用户评论 </a>
                             </li>
                             <li>
                                 <a href="rooms-category.html">房间分类 <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
@@ -170,13 +170,13 @@
 
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <input type="text" value="" class="form-control" placeholder="房间号">
+                                                        <span class="form-control" th:text="${roomId}">房间号:</span>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <select class="form-control">
+                                                        <select class="form-control" id="roomType">
                                                     		<option value="" selected="selected">--请选择房间类型--</option>
   															<option value="单人房">单人房</option>
  							 								<option value="双人房">双人房</option>
@@ -190,18 +190,18 @@
                                                 
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <input type="text" value="" class="form-control" placeholder="楼层">
+                                                        <input id="roomFloor" type="text" th:value="${room.roomFloor}" class="form-control" placeholder="楼层">
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <input type="text" value="" class="form-control" placeholder="房间方位">
+                                                        <input id="roomOrientation" type="text" th:value="${room.roomOrientation}" class="form-control" placeholder="房间方位">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-12">
-                                                    <a href="#" class="btn btn-main btn-block">修改</a>
+                                                    <a><button class="btn btn-main btn-block" onclick="updateRoom()">修改</button></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -259,7 +259,7 @@
         </footer>
 
     </div> <!--/wrapper-->
-
+        <form id="form"></form>
     <!--JS files-->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.js"></script>
@@ -267,5 +267,51 @@
     <script src="js/jquery.magnific-popup.js"></script>
     <script src="js/jquery.owl.carousel.js"></script>
     <script src="js/main.js"></script>
-	</body>
+        <script th:inline="javascript">
+            window.onload=function(){
+                document.getElementById("roomType").value = [[${room.roomType}]];
+            }
+            function updateRoom() {
+                var aId = [[${aId}]];
+                var roomId =[[${roomId}]];
+                var roomType = $("#roomType option:selected").val();
+                var roomFloor = $("#roomFloor").val();
+                var roomOrientation = $("#roomOrientation").val();
+                if (roomType === ""){
+                    alert("请选择房间类型");
+                }else if (roomFloor === "") {
+                    alert("请输入房间楼层");
+                }else if (roomOrientation === "") {
+                    alert("请输入房间方位");
+                }else {
+                    $.ajax({
+                        async:false,
+                        url : "/room/updateRoom",
+                        datatype : "String",
+                        type : "post",
+                        data:{
+                            roomId:roomId, roomType:roomType, roomFloor:roomFloor, roomOrientation:roomOrientation
+                        },success:function (res) {
+                            if (res === true){
+                                alert("修改成功");
+                                document.getElementById("form").action="/adminPage?aId="+aId;
+                                document.getElementById("form").method="post";
+                                document.getElementById("form").submit();
+                            }else{
+                                alert("修改失败");
+                            }
+                        },error:function () {
+                            alert("失败");
+                        }
+                    });
+                }
+            }
+            function back() {
+                var aId = [[${aId}]];
+                document.getElementById("form").action="/adminPage?aId="+aId;
+                document.getElementById("form").method="post";
+                document.getElementById("form").submit();
+            }
+        </script>
+    </body>
 </html>

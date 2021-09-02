@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -73,10 +73,6 @@
                             <i class="glyphicon glyphicon-log-in"></i> 
                             	登录
                         </a>
-                        <a class="box" href="user.html">
-                            <i class="glyphicon glyphicon-user"></i> 
-                            	个人界面
-                        </a>
                     </div>
                 </nav>
 
@@ -119,7 +115,7 @@
 
                         <ul class="navigation-right">
                             <li>
-                                <a href="userComment.html">用户评论 </a>
+                                <a href="/userCommentPage">用户评论</a>
                             </li>
                             <li>
                                 <a href="rooms-category.html">房间分类 <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
@@ -179,13 +175,20 @@
                 <div class="item" style="background-image:url(images/slide-1.jpg)">
                     <div class="box text-center">
                         <div class="container">
+                            <div class="rating animated" data-animation="fadeInDown">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
                             <h2 class="title animated h1" data-animation="fadeInDown">
-                                The privacy and <br />
-                                individuality of a custom
+                                隐私和安全问题 <br />
+                                以及风俗的个性
                             </h2>
                             <div class="desc animated" data-animation="fadeInUp">
-                                The Residences have their own dedicated private entrance as well <br />
-                                as an anonymous "celebrity" entrance, for ultimate privacy.
+                                这些住宅也有自己专用的私人入口 <br />
+                                作为一个匿名的“名人”入口，为最终的隐私。
                             </div>
                         </div>
                     </div>
@@ -551,7 +554,7 @@
                                     <a href="presidentialSuite.html" class="btn btn-danger btn-lg">预订</a>
                                 </div>
                                 <div>
-                                    <span class="price h2">￥ 129,00</span>
+                                    <span class="price h2">￥ 329,00</span>
                                     <span>每晚</span>
                                 </div>
                             </div> <!--/booking-->
@@ -625,7 +628,7 @@
                                     <a href="luxuryApartment.html" class="btn btn-danger btn-lg">预订</a>
                                 </div>
                                 <div>
-                                    <span class="price h2">￥ 229,00</span>
+                                    <span class="price h2">￥ 429,00</span>
                                     <span>每晚</span>
                                 </div>
                             </div>
@@ -650,7 +653,7 @@
                 <div class="container">
                     <h2 class="title">酒店 设施 <a href="facility.html" class="btn btn-sm btn-clean-dark">了解更多</a></h2>
                     <p>
-                        With the best luxury spa, salon and fitness experiences
+                        拥有最好的豪华水疗、沙龙和健身体验
                     </p>
                 </div>
             </div>
@@ -671,7 +674,7 @@
                     <!--main text-->
                     <figure>
                         <h4>水疗中心</h4>
-                        <figcaption>Unparalleled devotion to luxury</figcaption>
+                        <figcaption>无与伦比的奢侈爱好</figcaption>
                     </figure>
                 </li>
 
@@ -687,7 +690,7 @@
                     <!--main text-->
                     <figure>
                         <h4>健身房</h4>
-                        <figcaption>Care about results</figcaption>
+                        <figcaption>练出好身材</figcaption>
                     </figure>
                 </li>
 
@@ -702,7 +705,7 @@
                     </div>
                     <figure>
                         <h4>瑜伽室</h4>
-                        <figcaption>Your daily activities</figcaption>
+                        <figcaption>安静的健身项目</figcaption>
                     </figure>
                 </li>
 
@@ -720,7 +723,7 @@
                     <!--main text-->
                     <figure>
                         <h4>美容院</h4>
-                        <figcaption>Hair salons and spas</figcaption>
+                        <figcaption>美发沙龙</figcaption>
                     </figure>
                 </li>
 
@@ -745,7 +748,7 @@
             <div class="section-header">
                 <div class="container">
                     <h2 class="title">酒店 周边 <a href="facility.html" class="btn btn-sm btn-clean-dark">了解更多</a></h2>
-                    <p>Here's a selection of ionic sites related to art, fashion and design.</p>
+                    <p>这里有一些与艺术、时尚和设计相关的地点。</p>
                 </div>
             </div>
 
@@ -836,7 +839,7 @@
                 <div class="footer-social">
                     <div class="row">
                         <div class="col-sm-12 text-center hidden">
-                            <a href="" class="footer-logo"><img src="images/logo.png" alt="Alternate Text" /></a>
+                            <a class="footer-logo"><img src="images/logo.png" alt="Alternate Text" /></a>
                         </div>
                         <div class="col-sm-12 icons">
                             
@@ -853,7 +856,9 @@
         </footer>
 
     </div> <!--/wrapper-->
+    <form id="form">
 
+    </form>
     <!--JS files-->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.js"></script>
@@ -861,6 +866,13 @@
     <script src="js/jquery.magnific-popup.js"></script>
     <script src="js/jquery.owl.carousel.js"></script>
     <script src="js/main.js"></script>
+    <script th:inline="javascript">
+        function toUserComment() {
+            document.getElementById("form").action="/userCommentPage";
+            document.getElementById("form").method="post";
+            document.getElementById("form").submit();
+        }
+    </script>
 </body>
 
 </html>

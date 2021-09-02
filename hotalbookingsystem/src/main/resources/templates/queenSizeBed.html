@@ -65,17 +65,13 @@
                     <!-- navigation-top-right -->
 
                     <div class="navigation-top-right">
-                        <a class="box" href="#">
+                        <a class="box" href="register.html">
                             <i class="glyphicon glyphicon-list"></i> 
                             	注册
                         </a>
-                        <a class="box" href="reservation-1.html">
+                        <a class="box" href="login.html">
                             <i class="glyphicon glyphicon-log-in"></i> 
                             	登录
-                        </a>
-                        <a class="box" href="reservation-1.html">
-                            <i class="glyphicon glyphicon-user"></i> 
-                            	个人界面
                         </a>
                     </div>
                 </nav>
@@ -119,17 +115,17 @@
 
                         <ul class="navigation-right">
                             <li>
-                                <a href="userComment.html">用户评论 </a>
+                                <a href="/userCommentPage">用户评论 </a>
                             </li>
                             <li>
-                                <a href="">房间分类 <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
+                                <a href="rooms-category.html">房间分类 <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
                                 <ul>
-                                    <li><a href="">单人房</a></li>
-                                    <li><a href="">双人房</a></li>
-                                    <li><a href="">大床房</a></li>
-                                    <li><a href="">家庭套房</a></li>
-                                    <li><a href="">总统套房</a></li>
-                                    <li><a href="">豪华公寓</a></li>
+                                    <li><a href="singleRoom.html">单人房</a></li>
+                                    <li><a href="doubleRoom.html">双人房</a></li>
+                                    <li><a href="queenSizeBed.html">大床房</a></li>
+                                    <li><a href="familySuite.html">家庭套房</a></li>
+                                    <li><a href="presidentialSuite.html">总统套房</a></li>
+                                    <li><a href="luxuryApartment.html">豪华公寓</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -153,7 +149,7 @@
             <div class="page-header" style="background-image:url(images/header-1.jpg)">
                 <div class="container">
                     <h2 class="title">大床房</h2>
-                    <p>1590元每晚</p>
+                    <p>159元每晚</p>
                 </div>
             </div>
 
@@ -202,8 +198,8 @@
 
                                 <div class="col-xs-4 col-sm-3">
                                     <div class="date" id="dateArrival" data-text="入住">
-                                        <input class="datepicker" readonly="readonly" />
-                                        <div class="date-value"></div>
+                                        <input id="aTime" class="datepicker" readonly="readonly" />
+                                        <div id="aTimeDate" class="date-value"></div>
                                     </div>
                                 </div>
 
@@ -211,8 +207,8 @@
 
                                 <div class="col-xs-4 col-sm-3">
                                     <div class="date" id="dateDeparture" data-text="离店">
-                                        <input class="datepicker" readonly="readonly" />
-                                        <div class="date-value"></div>
+                                        <input id="lTime" class="datepicker" readonly="readonly" />
+                                        <div id="lTimeDate" class="date-value"></div>
                                     </div>
                                 </div>
 
@@ -229,7 +225,7 @@
                                         <ul class="guest-list">
 
                                             <li class="header">
-                                                Please choose number of guests <span class="qty-apply"><i class="icon icon-cross"></i></span>
+                                                请选择客人数量 <span class="qty-apply"><i class="icon icon-cross"></i></span>
                                             </li>
 
                                             <!--=== adults ===-->
@@ -311,8 +307,8 @@
                                 <!--=== button ===-->
 
                                 <div class="col-xs-12 col-sm-4">
-                                    <a href="reservation-1.html" class="btn btn-clean">
-										 现在预订
+                                    <a onclick="reservation()" class="btn btn-clean">
+                                        现在预订
                                     </a>
                                 </div>
 
@@ -582,7 +578,9 @@
         </footer>
 
     </div> <!--/wrapper-->
+    <form id="form">
 
+    </form>
     <!--JS files-->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.js"></script>
@@ -590,6 +588,68 @@
     <script src="js/jquery.magnific-popup.js"></script>
     <script src="js/jquery.owl.carousel.js"></script>
     <script src="js/main.js"></script>
+    <script type="text/javascript">
+        function getATime() {
+            var aTimeDateDay = document.getElementById("aTimeDate").childNodes.item(0).innerText;
+            var aTimeDateMouth = document.getElementById("aTimeDate").childNodes.item(2).innerText;
+            var aTimeDateYear = document.getElementById("aTimeDate").childNodes.item(4).innerText;
+            var seperator1 = "-";
+            if (aTimeDateMouth >= 1 && aTimeDateMouth <= 9) {
+                aTimeDateMouth = "0" + aTimeDateMouth;
+            }
+            if (aTimeDateDay >= 0 && aTimeDateDay <= 9) {
+                aTimeDateDay = "0" + aTimeDateDay;
+            }
+            return aTimeDateYear + seperator1 + aTimeDateMouth + seperator1 + aTimeDateDay;
+        }
+        function getLTime() {
+            var lTimeDateDay = document.getElementById("lTimeDate").childNodes.item(0).innerText;
+            var lTimeDateMouth = document.getElementById("lTimeDate").childNodes.item(2).innerText;
+            var lTimeDateYear = document.getElementById("lTimeDate").childNodes.item(4).innerText;
+            var seperator1 = "-";
+            if (lTimeDateMouth >= 1 && lTimeDateMouth <= 9) {
+                lTimeDateMouth = "0" + lTimeDateMouth;
+            }
+            if (lTimeDateDay >= 0 && lTimeDateDay <= 9) {
+                lTimeDateDay = "0" + lTimeDateDay;
+            }
+            return lTimeDateYear + seperator1 + lTimeDateMouth + seperator1 + lTimeDateDay;
+        }
+        function getDay(aTime, lTime) {
+            var time1 = new Date(aTime);
+            var time2 = new Date(lTime);
+            return (time2-time1)/86400000;
+        }
+        function reservation() {
+            var roomType = "大床房";
+            var aTime = getATime();
+            var lTime = getLTime();
+            var uNum = $("#qty-result").val();
+            var dayNum= getDay(aTime, lTime);
+            var price = 159*dayNum;
+            var image = "images/room-1.jpg";
+            var href = "queenSizeBed.html";
+            $.ajax({
+                async:false,
+                url : "/room/selectTypeRoom",
+                datatype : "String",
+                type : "post",
+                data:{
+                    roomType:roomType, aTime:aTime, lTime:lTime
+                },success:function (res) {
+                    if (res === true){
+                        document.getElementById("form").action="/reservation1Page?roomType="+roomType+"&aTime="+aTime+"&lTime="+lTime+"&uNum="+uNum+"&dayNum="+dayNum+"&price="+price+"&image="+image+"&href="+href;
+                        document.getElementById("form").method="post";
+                        document.getElementById("form").submit();
+                    }else{
+                        alert("该时间段此类型的房间已满");
+                    }
+                },error:function () {
+                    alert("失败");
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

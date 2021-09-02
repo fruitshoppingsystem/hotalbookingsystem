@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sys.hotalbookingsystem.dao.CommentDao">
+    <insert id="addComment" parameterType="com.sys.hotalbookingsystem.entity.Comment">
+        insert into comments (uEmail,roomId,cTime,cContent,uName,roomType) values (#{uEmail},#{roomId},#{cTime},#{cContent},#{uName},#{roomType})
+    </insert>
+    <delete id="deleteComment" parameterType="int">
+        delete from comments where cId = #{cId}
+    </delete>
+    <select id="selectAllComment" resultType="com.sys.hotalbookingsystem.entity.Comment">
+        select * from comments
+    </select>
 </mapper>

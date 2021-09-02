@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>跳转</title>
+</head>
+<body>
+<form id="form">
+</form>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/jquery.bootstrap.js"></script>
+<script src="js/jquery.magnific-popup.js"></script>
+<script src="js/jquery.owl.carousel.js"></script>
+<script src="js/main.js"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        var reg = new RegExp("(^|&)"+'out_trade_no'+"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null){
+            var oId = unescape(r[2]);
+        }else {
+            var oId = null;
+        }
+        $.ajax({
+            async: false,
+            type: 'post',
+            url: '/order/paySuccess',
+            dataType:'json',
+            data: {
+                oId: oId
+            },success: function (res){
+                if (res === true){
+                    document.getElementById("form").action="/reservation3Page?oId="+oId;
+                    document.getElementById("form").method="post";
+                    document.getElementById("form").submit();
+                }
+            },
+            error: function (){
+                alert("失败");
+            }
+        });
+    }
+</script>
+</html>
